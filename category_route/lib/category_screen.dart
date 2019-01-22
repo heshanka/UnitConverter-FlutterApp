@@ -14,8 +14,16 @@ import 'category.dart';
 ///
 /// While it is named CategoryRoute, a more apt name would be CategoryScreen,
 /// because it is responsible for the UI at the route's destination.
-class CategoryScreen extends StatelessWidget {
+class CategoryScreen extends StatefulWidget {
   const CategoryScreen();
+  
+  @override
+  _CategoryScreenState createState() => _CategoryScreenState();
+}
+
+class _CategoryScreenState extends State<CategoryScreen>{
+  
+  final _categories = <Category>[];
 
   static const _categoryNames = <String>[
     'Length',
@@ -38,6 +46,7 @@ class CategoryScreen extends StatelessWidget {
     Colors.purpleAccent,
     Colors.red,
   ];
+  
 
   List<Unit> _retrieveUnitList(String categoryName){
     return List.generate(10, (int i){
@@ -50,14 +59,9 @@ class CategoryScreen extends StatelessWidget {
   }
 
 
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: Create a list of the eight Categories, using the names and colors
-    // from above. Use a placeholder icon, such as `Icons.cake` for each
-    // Category. We'll add custom icons later.
-    final categories = <Category>[];
-
+ @override
+  void initState(){
+    super.initState();
     for(var i=0; i<_categoryNames.length; i++){
       categories.add(Category(
         name: _categoryNames[i],
@@ -66,7 +70,7 @@ class CategoryScreen extends StatelessWidget {
         units : _retrieveUnitList(_categoryNames[i])
       ));
     }
-
+  }
 
     // Create a list view of the Categories
     final listView = Container(
