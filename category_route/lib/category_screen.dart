@@ -6,6 +6,7 @@ import 'package:category_route/Unit.dart';
 import 'package:flutter/material.dart';
 import 'category.dart';
 
+
   final _backgroundColor = Colors.green[100];
 /// Category Route (screen).
 ///
@@ -22,7 +23,7 @@ class CategoryScreen extends StatefulWidget {
 }
 
 class _CategoryScreenState extends State<CategoryScreen>{
-  
+
   final _categories = <Category>[];
 
   static const _categoryNames = <String>[
@@ -46,7 +47,8 @@ class _CategoryScreenState extends State<CategoryScreen>{
     Colors.purpleAccent,
     Colors.red,
   ];
-  
+
+
 
   List<Unit> _retrieveUnitList(String categoryName){
     return List.generate(10, (int i){
@@ -54,7 +56,7 @@ class _CategoryScreenState extends State<CategoryScreen>{
       return Unit(
         name: '$categoryName Unit $i',
         conversion: i.toDouble(),
-      );    
+      );
     });
   }
 
@@ -63,7 +65,7 @@ class _CategoryScreenState extends State<CategoryScreen>{
   void initState(){
     super.initState();
     for(var i=0; i<_categoryNames.length; i++){
-      categories.add(Category(
+      _categories.add(Category(
         name: _categoryNames[i],
         color:  _baseColors[i],
         iconLocation: Icons.cake,
@@ -72,11 +74,20 @@ class _CategoryScreenState extends State<CategoryScreen>{
     }
   }
 
+  Widget _buildCategoryWidgets() {
+    return ListView.builder(
+      itemBuilder: (BuildContext context, int index) => _categories[index],
+      itemCount: _categories.length,
+    );
+  }
+
     // Create a list view of the Categories
+    @override
+    Widget build(BuildContext context) {
     final listView = Container(
       color: _backgroundColor,
       padding: EdgeInsets.symmetric(horizontal: 8.0),
-      child: _buildCategoryWidgets(categories),
+      child: _buildCategoryWidgets(),
     );
 
     final appBar = AppBar(
@@ -97,12 +108,4 @@ class _CategoryScreenState extends State<CategoryScreen>{
       body: listView,
     );
   }
-
-  Widget _buildCategoryWidgets(List<Widget> categories) {
-    return ListView.builder(
-        itemBuilder: (BuildContext context, int index) => categories[index],
-        itemCount: categories.length,
-    );
   }
-}
-

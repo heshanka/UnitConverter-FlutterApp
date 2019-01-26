@@ -2,6 +2,7 @@ import 'package:category_route/Unit.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
+
 class ConverterScreen extends StatefulWidget{
 
   final String name;
@@ -21,9 +22,10 @@ class ConverterScreen extends StatefulWidget{
 }
   
   class _ConverterScreenState extends State<ConverterScreen>{
+
     @override
     Widget build(BuildContext context) {
-    final unitWidgets = units.map((Unit unit){
+    final unitWidgets = widget.units.map((Unit unit){
       return Container(
         color: Colors.black12,
         margin: EdgeInsets.all(8.0),
